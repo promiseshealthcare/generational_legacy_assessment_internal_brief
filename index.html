@@ -1,34 +1,54 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generational Legacy Assessment — Internal Brief</title>
 <style>
-  .brief { padding: 2rem 0; font-family: var(--font-sans); max-width: 720px; }
-  .brief-header { border-bottom: 0.5px solid var(--color-border-tertiary); padding-bottom: 1.5rem; margin-bottom: 1.5rem; }
-  .brief-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; color: var(--color-text-tertiary); text-transform: uppercase; margin-bottom: 6px; }
-  .brief-title { font-size: 22px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 6px; }
-  .brief-sub { font-size: 14px; color: var(--color-text-secondary); margin: 0; }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f5f4ef;
+    color: #1a1a18;
+    padding: 2.5rem 1.5rem;
+    min-height: 100vh;
+  }
+  .brief { max-width: 720px; margin: 0 auto; background: #f5f4ef; }
+  .brief-header { border-bottom: 0.5px solid #d4d2c8; padding-bottom: 1.5rem; margin-bottom: 1.75rem; }
+  .brief-label { font-size: 11px; font-weight: 500; letter-spacing: 0.09em; color: #888780; text-transform: uppercase; margin-bottom: 8px; }
+  .brief-title { font-size: 28px; font-weight: 500; color: #1a1a18; margin-bottom: 6px; letter-spacing: -0.01em; line-height: 1.2; }
+  .brief-sub { font-size: 14px; color: #5f5e5a; line-height: 1.6; }
   .section { margin-bottom: 1.75rem; }
-  .section-title { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
-  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 10px; }
-  .card-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
-  .card-left { flex: 1; }
-  .card-tag { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 999px; margin-bottom: 6px; }
-  .tag-clinical { background: #FCEBEB; color: #791F1F; }
-  .tag-doc { background: #E1F5EE; color: #085041; }
-  .card-name { font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 4px; }
-  .card-desc { font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.6; }
-  .card-price { text-align: right; white-space: nowrap; }
-  .price-amount { font-size: 16px; font-weight: 500; color: var(--color-text-primary); }
-  .price-note { font-size: 11px; color: var(--color-text-tertiary); }
-  .total-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 0.5px solid var(--color-border-secondary); margin-top: 4px; }
-  .total-label { font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
-  .total-amount { font-size: 18px; font-weight: 500; color: var(--color-text-primary); }
-  .insight-card { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 10px; }
-  .insight-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 4px; }
-  .insight-body { font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.6; }
-  .divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 1.5rem 0; }
-  .quote { border-left: 2px solid var(--color-border-secondary); padding: 8px 14px; margin: 10px 0; border-radius: 0; }
-  .quote p { font-size: 13px; color: var(--color-text-secondary); margin: 0; font-style: italic; line-height: 1.6; }
+  .section-title { font-size: 11px; font-weight: 500; color: #888780; text-transform: uppercase; letter-spacing: 0.09em; margin-bottom: 14px; }
+  .section-body { font-size: 14px; color: #5f5e5a; line-height: 1.75; }
+  .card { background: #ffffff; border: 0.5px solid #d4d2c8; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px; }
+  .card-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
+  .card-left { flex: 1; min-width: 0; }
+  .card-tag { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 11px; border-radius: 999px; margin-bottom: 7px; letter-spacing: 0.01em; }
+  .tag-clinical { background: #fce8e8; color: #7a2020; }
+  .tag-doc { background: #dff2ea; color: #0a5535; }
+  .tag-report { background: #dff2ea; color: #0a5535; }
+  .card-name { font-size: 15px; font-weight: 500; color: #1a1a18; margin-bottom: 5px; line-height: 1.4; }
+  .card-desc { font-size: 13px; color: #5f5e5a; line-height: 1.65; }
+  .card-price { text-align: right; white-space: nowrap; flex-shrink: 0; }
+  .price-amount { font-size: 17px; font-weight: 500; color: #1a1a18; display: block; margin-bottom: 2px; }
+  .price-note { font-size: 11px; color: #888780; display: block; }
+  .total-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0 6px; border-top: 0.5px solid #c8c6bc; margin-top: 4px; }
+  .total-label { font-size: 14px; font-weight: 500; color: #1a1a18; }
+  .total-amount { font-size: 20px; font-weight: 500; color: #1a1a18; }
+  .total-footnote { font-size: 12px; color: #888780; margin-top: 6px; }
+  .divider { border: none; border-top: 0.5px solid #d4d2c8; margin: 1.75rem 0; }
+  .insight-card { background: #eeeee9; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px; }
+  .insight-title { font-size: 13px; font-weight: 500; color: #1a1a18; margin-bottom: 6px; }
+  .insight-body { font-size: 13px; color: #5f5e5a; line-height: 1.65; }
+  .quote { border-left: 2px solid #c8c6bc; padding: 8px 14px; margin: 10px 0 0; }
+  .quote p { font-size: 13px; color: #5f5e5a; font-style: italic; line-height: 1.7; }
 </style>
+</head>
+<body>
 <div class="brief">
+
   <div class="brief-header">
     <div class="brief-label">Internal product brief — Promises Healthcare</div>
     <h1 class="brief-title">Generational Legacy Assessment</h1>
@@ -37,7 +57,7 @@
 
   <div class="section">
     <div class="section-title">What this is</div>
-    <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0; line-height: 1.7;">The Generational Legacy Assessment is a three-part structured documentation programme for UHNW individuals who wish to ensure their legacy intentions are recorded with the rigour necessary to withstand scrutiny. It is not a clinical or psychiatric assessment programme. Its purpose is to create a contemporaneous, professionally witnessed record of the patient's clarity of mind, intentions, and family context — produced at a specific point in time, signed by a Senior Consultant Psychiatrist, and suitable for reference in trust, estate, and capacity proceedings.</p>
+    <p class="section-body">The Generational Legacy Assessment is a three-part structured documentation programme for UHNW individuals who wish to ensure their legacy intentions are recorded with the rigour necessary to withstand scrutiny. It is not a clinical or psychiatric assessment programme. Its purpose is to create a contemporaneous, professionally witnessed record of the patient's clarity of mind, intentions, and family context — produced at a specific point in time, signed by a Senior Consultant Psychiatrist, and suitable for reference in trust, estate, and capacity proceedings.</p>
   </div>
 
   <div class="section">
@@ -51,8 +71,8 @@
           <p class="card-desc">Dr Joe's existing 1:1 consultation. Establishes baseline capacity. This is the clinical foundation, not the product. Patients already receiving this service may proceed to Sessions 2 and 3.</p>
         </div>
         <div class="card-price">
-          <div class="price-amount">SGD 1,500</div>
-          <div class="price-note">existing fee</div>
+          <span class="price-amount">SGD 1,500</span>
+          <span class="price-note">existing fee</span>
         </div>
       </div>
     </div>
@@ -65,8 +85,8 @@
           <p class="card-desc">A structured 2-hour session with the patient alone. Not a clinical assessment. Purpose is to document, in the patient's own voice, their legacy intentions — what they wish to pass on, to whom, and under what conditions. Session is recorded and transcribed. A signed contemporaneous record is produced.</p>
         </div>
         <div class="card-price">
-          <div class="price-amount">SGD 3,500</div>
-          <div class="price-note">per session</div>
+          <span class="price-amount">SGD 3,500</span>
+          <span class="price-note">per session</span>
         </div>
       </div>
     </div>
@@ -79,8 +99,8 @@
           <p class="card-desc">A structured 2-hour session with the patient and selected family members present. Not a clinical intervention or mediation. Purpose is to document the relational landscape — who is present, what is observed, how the patient responds. Creates a forensic record of the family context at the time of the patient's decisions.</p>
         </div>
         <div class="card-price">
-          <div class="price-amount">SGD 4,500</div>
-          <div class="price-note">per session</div>
+          <span class="price-amount">SGD 4,500</span>
+          <span class="price-note">per session</span>
         </div>
       </div>
     </div>
@@ -88,22 +108,22 @@
     <div class="card">
       <div class="card-row">
         <div class="card-left">
-          <span class="card-tag tag-doc">Separate deliverable</span>
+          <span class="card-tag tag-report">Separate deliverable</span>
           <p class="card-name">Clinical report and documentation</p>
           <p class="card-desc">Comprehensive written report synthesising all three sessions. Litigation-ready. Signed by Dr Joseph Leong, Senior Consultant Psychiatrist, Promises Healthcare. Estimated drafting time: 3–4 hours. Charged separately as a standalone professional deliverable.</p>
         </div>
         <div class="card-price">
-          <div class="price-amount">SGD 2,500</div>
-          <div class="price-note">per report</div>
+          <span class="price-amount">SGD 2,500</span>
+          <span class="price-note">per report</span>
         </div>
       </div>
     </div>
 
     <div class="total-row">
-      <div class="total-label">Total package (Sessions 2–3 + Report)</div>
-      <div class="total-amount">SGD 10,500</div>
+      <span class="total-label">Total package (Sessions 2–3 + Report)</span>
+      <span class="total-amount">SGD 10,500</span>
     </div>
-    <p style="font-size: 12px; color: var(--color-text-tertiary); margin: 6px 0 0;">Session 1 billed separately at existing rate. Full package excludes Session 1.</p>
+    <p class="total-footnote">Session 1 billed separately at existing rate. Full package excludes Session 1.</p>
   </div>
 
   <hr class="divider">
@@ -113,7 +133,9 @@
 
     <div class="insight-card">
       <p class="insight-title">When the patient says: "I cannot change my family's mindset"</p>
-      <div class="quote"><p>"You don't need to. What we are doing is not about changing anyone's mind. It is about making sure that your mind — your clarity, your intentions, your wishes at this moment — is so thoroughly documented that it speaks for itself long after this conversation. Your family's mindset becomes irrelevant when the record is this strong."</p></div>
+      <div class="quote">
+        <p>"You don't need to. What we are doing is not about changing anyone's mind. It is about making sure that your mind — your clarity, your intentions, your wishes at this moment — is so thoroughly documented that it speaks for itself long after this conversation. Your family's mindset becomes irrelevant when the record is this strong."</p>
+      </div>
     </div>
 
     <div class="insight-card">
@@ -131,6 +153,9 @@
 
   <div class="section">
     <div class="section-title">Referral pathway</div>
-    <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0; line-height: 1.7;">The most effective referral channel is the patient's own lawyer — specifically private wealth and trust partners who are already advising on estate and succession matters. When a trusted partner says "I would strongly recommend Dr Joseph's assessment before we finalise this," the patient does not need to be independently convinced. The 17 June roundtable and the pre-meeting 1:1 conversations with partners are the primary mechanism for seeding this referral behaviour.</p>
+    <p class="section-body">The most effective referral channel is the patient's own lawyer — specifically private wealth and trust partners who are already advising on estate and succession matters. When a trusted partner says "I would strongly recommend Dr Joseph's assessment before we finalise this," the patient does not need to be independently convinced. The 17 June roundtable and the pre-meeting 1:1 conversations with partners are the primary mechanism for seeding this referral behaviour.</p>
   </div>
+
 </div>
+</body>
+</html>

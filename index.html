@@ -1,7 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generational Legacy Assessment</title>
 <style>
+  :root{
+    --color-background-primary:#ffffff;
+    --color-background-secondary:#f7f7f5;
+    --color-background-tertiary:#f0efeb;
+    --color-text-primary:#1a1a18;
+    --color-text-secondary:#5c5c56;
+    --color-text-tertiary:#8f8f88;
+    --color-border-tertiary:rgba(0,0,0,0.1);
+    --color-border-secondary:rgba(0,0,0,0.18);
+    --color-border-primary:rgba(0,0,0,0.25);
+    --border-radius-md:8px;
+    --border-radius-lg:12px;
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  }
   *{box-sizing:border-box;margin:0;padding:0;}
-  .layout{display:flex;min-height:100vh;font-family:var(--font-sans);}
-  .sidebar{width:180px;flex-shrink:0;padding:2rem 1.25rem;border-right:0.5px solid #e0e0e0;position:sticky;top:0;height:100vh;}
+  body{background:var(--color-background-tertiary);font-family:var(--font-sans);}
+  .layout{display:flex;min-height:100vh;}
+  .sidebar{width:180px;flex-shrink:0;padding:2rem 1.25rem;border-right:0.5px solid #d8d8d4;position:sticky;top:0;height:100vh;background:transparent;}
   .sidebar-label{font-size:10px;font-weight:500;letter-spacing:0.08em;color:var(--color-text-tertiary);text-transform:uppercase;margin-bottom:1.25rem;}
   .nav-link{display:block;font-size:13px;color:var(--color-text-secondary);text-decoration:none;padding:6px 0;cursor:pointer;transition:color 0.15s;}
   .nav-link:hover{color:var(--color-text-primary);}
@@ -27,7 +48,7 @@
   .card-price{text-align:right;white-space:nowrap;}
   .price-amount{font-size:16px;font-weight:500;color:var(--color-text-primary);}
   .price-note{font-size:11px;color:var(--color-text-tertiary);}
-  .total-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:0.5px solid var(--color-border-secondary);margin-top:4px;}
+  .total-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:0.5px solid rgba(0,0,0,0.18);margin-top:4px;}
   .total-label{font-size:14px;font-weight:500;color:var(--color-text-primary);}
   .total-amount{font-size:18px;font-weight:500;color:var(--color-text-primary);}
   .insight-card{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:10px;}
@@ -35,7 +56,7 @@
   .insight-body,.gap-body{font-size:13px;color:var(--color-text-secondary);margin:0;line-height:1.6;}
   .gap-card{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:10px;}
   .divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:1.75rem 0;}
-  .quote{border-left:2px solid var(--color-border-secondary);padding:8px 14px;margin:10px 0;}
+  .quote{border-left:2px solid rgba(0,0,0,0.18);padding:8px 14px;margin:10px 0;}
   .quote p{font-size:13px;color:var(--color-text-secondary);font-style:italic;line-height:1.6;}
   .phase-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
   .phase-badge{font-size:11px;font-weight:500;padding:4px 12px;border-radius:999px;white-space:nowrap;}
@@ -45,7 +66,7 @@
   .badge-risk{background:#FCEBEB;color:#791F1F;}
   .phase-title{font-size:16px;font-weight:500;color:var(--color-text-primary);}
   .step-list{list-style:none;padding:0;margin:8px 0 0;}
-  .step-list li{font-size:13px;color:var(--color-text-secondary);padding:5px 0 5px 20px;position:relative;line-height:1.6;border-bottom:0.5px solid var(--color-border-tertiary);}
+  .step-list li{font-size:13px;color:var(--color-text-secondary);padding:5px 0 5px 20px;position:relative;line-height:1.6;border-bottom:0.5px solid rgba(0,0,0,0.08);}
   .step-list li:last-child{border-bottom:none;}
   .step-list li::before{content:"—";position:absolute;left:0;color:var(--color-text-tertiary);}
   .terminate-card{background:var(--color-background-secondary);border-left:3px solid #E24B4A;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:1rem 1.25rem;margin-bottom:10px;}
@@ -58,16 +79,15 @@
   .script-block{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 16px;margin:8px 0;}
   .script-label{font-size:11px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;}
   .script-text{font-size:13px;color:var(--color-text-secondary);font-style:italic;margin:0;line-height:1.65;}
-  .signoff{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;}
-  .signoff-name{font-size:15px;font-weight:500;color:var(--color-text-primary);margin:0 0 4px;}
-  .signoff-title{font-size:13px;color:var(--color-text-secondary);margin:0;line-height:1.6;}
 </style>
+</head>
+<body>
 
 <div class="layout">
   <div class="sidebar">
-    <div class="sidebar-label">Contents</div>
-    <a class="nav-link active" onclick="show('brief')">Internal brief</a>
-    <a class="nav-link" onclick="show('protocol')">Protocol</a>
+    <div class="sidebar-label">GLA</div>
+    <a class="nav-link active" onclick="show('brief',this)">Internal brief</a>
+    <a class="nav-link" onclick="show('protocol',this)">Protocol</a>
   </div>
 
   <div class="content">
@@ -78,84 +98,50 @@
         <h1 class="brief-title">Generational Legacy Assessment</h1>
         <p class="brief-sub">A structured documentation programme for UHNW patients — conducted by Dr Joseph Leong, Senior Consultant Psychiatrist</p>
       </div>
-
       <div class="section">
         <div class="section-label">What this is</div>
-        <p style="font-size:14px;color:var(--color-text-secondary);line-height:1.7;">The Generational Legacy Assessment is a three-part structured documentation programme for UHNW individuals who wish to ensure their legacy intentions are recorded with the rigour necessary to withstand scrutiny. It is not a clinical or psychiatric assessment programme. Its purpose is to create a contemporaneous, professionally witnessed record of the patient's clarity of mind, intentions, and family context — produced at a specific point in time, signed by a Senior Consultant Psychiatrist, and suitable for reference in trust, estate, and capacity proceedings.</p>
+        <p style="font-size:14px;color:#5c5c56;line-height:1.7;">The Generational Legacy Assessment is a three-part structured documentation programme for UHNW individuals who wish to ensure their legacy intentions are recorded with the rigour necessary to withstand scrutiny. It is not a clinical or psychiatric assessment programme. Its purpose is to create a contemporaneous, professionally witnessed record of the patient's clarity of mind, intentions, and family context — produced at a specific point in time, signed by a Senior Consultant Psychiatrist, and suitable for reference in trust, estate, and capacity proceedings.</p>
       </div>
-
       <div class="section">
         <div class="section-label">Session structure and fees</div>
         <div class="card">
           <div class="card-row">
-            <div class="card-left">
-              <span class="card-tag tag-clinical">Clinical assessment</span>
-              <p class="card-name">Session 1 — Capacity assessment</p>
-              <p class="card-desc">Dr Joe's existing 1:1 consultation. Establishes baseline capacity. This is the clinical foundation, not the product. Patients already receiving this service may proceed to Sessions 2 and 3.</p>
-            </div>
+            <div class="card-left"><span class="card-tag tag-clinical">Clinical assessment</span><p class="card-name">Session 1 — Capacity assessment</p><p class="card-desc">Dr Joe's existing 1:1 consultation. Establishes baseline capacity. This is the clinical foundation, not the product. Patients already receiving this service may proceed to Sessions 2 and 3.</p></div>
             <div class="card-price"><div class="price-amount">SGD 1,500</div><div class="price-note">existing fee</div></div>
           </div>
         </div>
         <div class="card">
           <div class="card-row">
-            <div class="card-left">
-              <span class="card-tag tag-doc">Documentation session</span>
-              <p class="card-name">Session 2 — Legacy intentions interview</p>
-              <p class="card-desc">A structured 2-hour session with the patient alone. Not a clinical assessment. Purpose is to document, in the patient's own voice, their legacy intentions — what they wish to pass on, to whom, and under what conditions. Session is recorded and transcribed. A signed contemporaneous record is produced.</p>
-            </div>
+            <div class="card-left"><span class="card-tag tag-doc">Documentation session</span><p class="card-name">Session 2 — Legacy intentions interview</p><p class="card-desc">A structured 2-hour session with the patient alone. Not a clinical assessment. Purpose is to document, in the patient's own voice, their legacy intentions — what they wish to pass on, to whom, and under what conditions. Session is recorded and transcribed. A signed contemporaneous record is produced.</p></div>
             <div class="card-price"><div class="price-amount">SGD 3,500</div><div class="price-note">per session</div></div>
           </div>
         </div>
         <div class="card">
           <div class="card-row">
-            <div class="card-left">
-              <span class="card-tag tag-doc">Documentation session</span>
-              <p class="card-name">Session 3 — Family mapping session</p>
-              <p class="card-desc">A structured 2-hour session with the patient and selected family members present. Not a clinical intervention or mediation. Purpose is to document the relational landscape — who is present, what is observed, how the patient responds. Creates a forensic record of the family context at the time of the patient's decisions.</p>
-            </div>
+            <div class="card-left"><span class="card-tag tag-doc">Documentation session</span><p class="card-name">Session 3 — Family mapping session</p><p class="card-desc">A structured 2-hour session with the patient and selected family members present. Not a clinical intervention or mediation. Purpose is to document the relational landscape — who is present, what is observed, how the patient responds. Creates a forensic record of the family context at the time of the patient's decisions.</p></div>
             <div class="card-price"><div class="price-amount">SGD 4,500</div><div class="price-note">per session</div></div>
           </div>
         </div>
         <div class="card">
           <div class="card-row">
-            <div class="card-left">
-              <span class="card-tag tag-doc">Separate deliverable</span>
-              <p class="card-name">Clinical report and documentation</p>
-              <p class="card-desc">Comprehensive written report synthesising all three sessions. Litigation-ready. Signed by Dr Joseph Leong, Senior Consultant Psychiatrist, Promises Healthcare. Estimated drafting time: 3–4 hours. Charged separately as a standalone professional deliverable.</p>
-            </div>
+            <div class="card-left"><span class="card-tag tag-doc">Separate deliverable</span><p class="card-name">Clinical report and documentation</p><p class="card-desc">Comprehensive written report synthesising all three sessions. Litigation-ready. Signed by Dr Joseph Leong, Senior Consultant Psychiatrist, Promises Healthcare. Estimated drafting time: 3–4 hours. Charged separately as a standalone professional deliverable.</p></div>
             <div class="card-price"><div class="price-amount">SGD 2,500</div><div class="price-note">per report</div></div>
           </div>
         </div>
-        <div class="total-row">
-          <div class="total-label">Total package (Sessions 2–3 + Report)</div>
-          <div class="total-amount">SGD 10,500</div>
-        </div>
-        <p style="font-size:12px;color:var(--color-text-tertiary);margin:6px 0 0;">Session 1 billed separately at existing rate. Full package excludes Session 1.</p>
+        <div class="total-row"><div class="total-label">Total package (Sessions 2–3 + Report)</div><div class="total-amount">SGD 10,500</div></div>
+        <p style="font-size:12px;color:#8f8f88;margin:6px 0 0;">Session 1 billed separately at existing rate. Full package excludes Session 1.</p>
       </div>
-
       <hr class="divider">
-
       <div class="section">
         <div class="section-label">How to position this to patients</div>
-        <div class="insight-card">
-          <p class="insight-title">When the patient says: "I cannot change my family's mindset"</p>
-          <div class="quote"><p>"You don't need to. What we are doing is not about changing anyone's mind. It is about making sure that your mind — your clarity, your intentions, your wishes at this moment — is so thoroughly documented that it speaks for itself long after this conversation. Your family's mindset becomes irrelevant when the record is this strong."</p></div>
-        </div>
-        <div class="insight-card">
-          <p class="insight-title">The core reframe</p>
-          <p class="insight-body">This is not a family therapy exercise. This is a legacy protection measure. The patient is not being asked to manage their family. They are being given the means to ensure that what they have built cannot be dismantled after they are gone. Frame it as an act of agency, not an admission of vulnerability.</p>
-        </div>
-        <div class="insight-card">
-          <p class="insight-title">Pricing justification</p>
-          <p class="insight-body">The fee is not for clinical time. It is for a signed, professionally produced document that may determine the outcome of proceedings involving assets of significant value. UHNW patients routinely spend multiples of this figure on estate planning and legal fees. The Generational Legacy Assessment belongs in the same category — not in the same conversation as a therapy session.</p>
-        </div>
+        <div class="insight-card"><p class="insight-title">When the patient says: "I cannot change my family's mindset"</p><div class="quote"><p>"You don't need to. What we are doing is not about changing anyone's mind. It is about making sure that your mind — your clarity, your intentions, your wishes at this moment — is so thoroughly documented that it speaks for itself long after this conversation. Your family's mindset becomes irrelevant when the record is this strong."</p></div></div>
+        <div class="insight-card"><p class="insight-title">The core reframe</p><p class="insight-body">This is not a family therapy exercise. This is a legacy protection measure. The patient is not being asked to manage their family. They are being given the means to ensure that what they have built cannot be dismantled after they are gone. Frame it as an act of agency, not an admission of vulnerability.</p></div>
+        <div class="insight-card"><p class="insight-title">Pricing justification</p><p class="insight-body">The fee is not for clinical time. It is for a signed, professionally produced document that may determine the outcome of proceedings involving assets of significant value. UHNW patients routinely spend multiples of this figure on estate planning and legal fees. The Generational Legacy Assessment belongs in the same category — not in the same conversation as a therapy session.</p></div>
       </div>
-
       <hr class="divider">
-
       <div class="section">
         <div class="section-label">Referral pathway</div>
-        <p style="font-size:14px;color:var(--color-text-secondary);line-height:1.7;">The most effective referral channel is the patient's own lawyer — specifically private wealth and trust partners who are already advising on estate and succession matters. When a trusted partner says "I would strongly recommend Dr Joseph's assessment before we finalise this," the patient does not need to be independently convinced. The 17 June roundtable and the pre-meeting 1:1 conversations with partners are the primary mechanism for seeding this referral behaviour.</p>
+        <p style="font-size:14px;color:#5c5c56;line-height:1.7;">The most effective referral channel is the patient's own lawyer — specifically private wealth and trust partners who are already advising on estate and succession matters. When a trusted partner says "I would strongly recommend Dr Joseph's assessment before we finalise this," the patient does not need to be independently convinced. The 17 June roundtable and the pre-meeting 1:1 conversations with partners are the primary mechanism for seeding this referral behaviour.</p>
       </div>
     </div>
 
@@ -165,38 +151,17 @@
         <h1 class="brief-title">Session 3 family mapping — protocol and consent framework</h1>
         <p class="brief-sub">Governing document for the conduct of family mapping sessions. Covers pre-session conditions, consent requirements, in-session ground rules, and response protocols for adversarial or disruptive behaviour.</p>
       </div>
-
       <div class="section">
         <div class="phase-header"><span class="phase-badge badge-pre">Phase 1</span><p class="phase-title">Pre-session — conditions for Session 3 to proceed</p></div>
-        <div class="card">
-          <p class="card-title">Step 1 — Patient initiates, not family</p>
-          <p class="card-body">Session 3 may only be scheduled at the explicit request of the patient following Session 2. Family members may not request or initiate Session 3 independently. This preserves the patient's agency as the primary subject of the assessment and prevents family members from using the session to assert their own position.</p>
-        </div>
-        <div class="card">
-          <p class="card-title">Step 2 — Patient selects who attends</p>
-          <p class="card-body">The patient alone determines which family members are invited to Session 3. Dr Joe does not accept requests from family members to include or exclude other individuals. The patient's selection is documented prior to the session and forms part of the assessment record.</p>
-        </div>
-        <div class="card">
-          <p class="card-title">Step 3 — Pre-session family briefing (without patient)</p>
-          <p class="card-body">Before Session 3, Dr Joe or a Promises coordinator conducts a brief orientation with the invited family members — without the patient present. Family members who decline the briefing or express unwillingness to comply with ground rules are not admitted to Session 3.</p>
-          <ul class="step-list">
-            <li>Session is an observational documentation exercise, not therapy or mediation</li>
-            <li>Dr Joe's role is to observe and record, not to facilitate or adjudicate</li>
-            <li>All participants consent to session recording and documentation</li>
-            <li>Dr Joe retains the right to pause or terminate the session at any point</li>
-          </ul>
-        </div>
-        <div class="card">
-          <p class="card-title">Step 4 — Dr Joe's right to decline or postpone</p>
-          <p class="card-body">If Dr Joe determines that the family composition presents a material risk to the integrity of the documentation session — including known hostility between parties, legal proceedings already commenced, or evidence of prior undue influence — he may decline to proceed and document his reasons. Session 3 is offered at clinical discretion, not as an obligation.</p>
-        </div>
+        <div class="card"><p class="card-title">Step 1 — Patient initiates, not family</p><p class="card-body">Session 3 may only be scheduled at the explicit request of the patient following Session 2. Family members may not request or initiate Session 3 independently. This preserves the patient's agency as the primary subject of the assessment and prevents family members from using the session to assert their own position.</p></div>
+        <div class="card"><p class="card-title">Step 2 — Patient selects who attends</p><p class="card-body">The patient alone determines which family members are invited to Session 3. Dr Joe does not accept requests from family members to include or exclude other individuals. The patient's selection is documented prior to the session and forms part of the assessment record.</p></div>
+        <div class="card"><p class="card-title">Step 3 — Pre-session family briefing (without patient)</p><p class="card-body">Before Session 3, Dr Joe or a Promises coordinator conducts a brief orientation with the invited family members — without the patient present. Family members who decline the briefing or express unwillingness to comply with ground rules are not admitted to Session 3.</p><ul class="step-list"><li>Session is an observational documentation exercise, not therapy or mediation</li><li>Dr Joe's role is to observe and record, not to facilitate or adjudicate</li><li>All participants consent to session recording and documentation</li><li>Dr Joe retains the right to pause or terminate the session at any point</li></ul></div>
+        <div class="card"><p class="card-title">Step 4 — Dr Joe's right to decline or postpone</p><p class="card-body">If Dr Joe determines that the family composition presents a material risk to the integrity of the documentation session — including known hostility between parties, legal proceedings already commenced, or evidence of prior undue influence — he may decline to proceed and document his reasons. Session 3 is offered at clinical discretion, not as an obligation.</p></div>
       </div>
-
       <hr class="divider">
-
       <div class="section">
         <div class="phase-header"><span class="phase-badge badge-consent">Phase 2</span><p class="phase-title">Consent requirements — all participants</p></div>
-        <p style="font-size:14px;color:var(--color-text-secondary);line-height:1.7;margin:0 0 14px;">All participants must provide written informed consent before the session commences, covering the following:</p>
+        <p style="font-size:14px;color:#5c5c56;line-height:1.7;margin:0 0 14px;">All participants must provide written informed consent before the session commences, covering the following:</p>
         <div class="consent-grid">
           <div class="consent-item"><p class="consent-item-title">Recording consent</p><p class="consent-item-body">Session will be audio or video recorded. Recording may be referenced in the formal clinical report.</p></div>
           <div class="consent-item"><p class="consent-item-title">Documentation consent</p><p class="consent-item-body">Dr Joe will take observational notes. Observations may be cited in the final signed report.</p></div>
@@ -206,87 +171,30 @@
           <div class="consent-item"><p class="consent-item-title">Independent advice acknowledgement</p><p class="consent-item-body">Family members are advised they may wish to seek independent legal advice before participating.</p></div>
         </div>
       </div>
-
       <hr class="divider">
-
       <div class="section">
         <div class="phase-header"><span class="phase-badge badge-in">Phase 3</span><p class="phase-title">In-session — ground rules and opening script</p></div>
-        <div class="card">
-          <p class="card-title">Opening script — read by Dr Joe at the start of every Session 3</p>
-          <div class="script-block">
-            <div class="script-label">Script</div>
-            <p class="script-text">"Thank you all for being here. I am Dr Joseph Leong, Senior Consultant Psychiatrist at Promises Healthcare. I am not here today as a therapist or mediator. My role is to observe and document. Everything said and observed in this session will be recorded and may form part of a formal clinical report. Each of you has already signed a consent form confirming your understanding of this. The session is structured around questions I will direct primarily to [patient's name]. Family members are welcome to respond when invited to do so. I ask that you allow [patient's name] to speak without interruption. If at any point I ask you to pause, please do so. I have the right to pause or end the session if I consider it necessary. Are there any questions before we begin?"</p>
-          </div>
-        </div>
-        <div class="card">
-          <p class="card-title">Ground rules in force throughout</p>
-          <ul class="step-list">
-            <li>Only one person speaks at a time</li>
-            <li>Family members do not answer questions directed at the patient</li>
-            <li>Family members do not interrupt or correct the patient's responses</li>
-            <li>No non-verbal communication directed at the patient in response to their answers</li>
-            <li>Dr Joe directs the structure and pace of the session at all times</li>
-            <li>Any participant may request a short break — but may not request a private consultation with the patient</li>
-          </ul>
-        </div>
+        <div class="card"><p class="card-title">Opening script — read by Dr Joe at the start of every Session 3</p><div class="script-block"><div class="script-label">Script</div><p class="script-text">"Thank you all for being here. I am Dr Joseph Leong, Senior Consultant Psychiatrist at Promises Healthcare. I am not here today as a therapist or mediator. My role is to observe and document. Everything said and observed in this session will be recorded and may form part of a formal clinical report. Each of you has already signed a consent form confirming your understanding of this. The session is structured around questions I will direct primarily to [patient's name]. Family members are welcome to respond when invited to do so. I ask that you allow [patient's name] to speak without interruption. If at any point I ask you to pause, please do so. I have the right to pause or end the session if I consider it necessary. Are there any questions before we begin?"</p></div></div>
+        <div class="card"><p class="card-title">Ground rules in force throughout</p><ul class="step-list"><li>Only one person speaks at a time</li><li>Family members do not answer questions directed at the patient</li><li>Family members do not interrupt or correct the patient's responses</li><li>No non-verbal communication directed at the patient in response to their answers</li><li>Dr Joe directs the structure and pace of the session at all times</li><li>Any participant may request a short break — but may not request a private consultation with the patient</li></ul></div>
       </div>
-
       <hr class="divider">
-
       <div class="section">
         <div class="phase-header"><span class="phase-badge badge-risk">Phase 4</span><p class="phase-title">In-session — response protocols for adversarial behaviour</p></div>
-        <div class="terminate-card">
-          <p class="terminate-title">Scenario A — Family member interrupts or speaks over the patient</p>
-          <p class="terminate-body">Dr Joe addresses the family member directly: "I need to ask you to wait until I invite you to respond." If the interruption recurs, Dr Joe notes it for the record. The interruption itself becomes part of the documented observational record.</p>
-        </div>
-        <div class="terminate-card">
-          <p class="terminate-title">Scenario B — Family member becomes hostile or aggressive</p>
-          <p class="terminate-body">Dr Joe pauses the session. He assesses whether the patient appears distressed or pressured. If yes, he invites the family member to step outside and continues with the patient alone, documenting the circumstances. If hostility continues, Dr Joe terminates the session. A partial session record is still a valid and usable document.</p>
-        </div>
-        <div class="terminate-card">
-          <p class="terminate-title">Scenario C — Patient appears distressed or changes prior position in family presence</p>
-          <p class="terminate-body">Dr Joe does not redirect or attempt to resolve the pressure in the moment. He documents the observed change carefully and invites family members to step outside at an appropriate pause. The divergence between the patient's responses alone (Session 2) versus in family presence (Session 3) is itself significant clinical evidence.</p>
-        </div>
-        <div class="terminate-card">
-          <p class="terminate-title">Scenario D — Family member refuses or withdraws consent mid-session</p>
-          <p class="terminate-body">Dr Joe acknowledges the withdrawal without debate and excuses the family member. The session continues with remaining participants. The patient's reaction to the withdrawal is part of the record.</p>
-        </div>
-        <div class="terminate-card">
-          <p class="terminate-title">Scenario E — Legal proceedings between parties disclosed during the session</p>
-          <p class="terminate-body">Dr Joe pauses immediately and does not continue until he has obtained independent advice on whether proceeding creates a professional conflict. He documents the disclosure and suspends the session pending review.</p>
-        </div>
+        <div class="terminate-card"><p class="terminate-title">Scenario A — Family member interrupts or speaks over the patient</p><p class="terminate-body">Dr Joe addresses the family member directly: "I need to ask you to wait until I invite you to respond." If the interruption recurs, Dr Joe notes it for the record. The interruption itself becomes part of the documented observational record.</p></div>
+        <div class="terminate-card"><p class="terminate-title">Scenario B — Family member becomes hostile or aggressive</p><p class="terminate-body">Dr Joe pauses the session. He assesses whether the patient appears distressed or pressured. If yes, he invites the family member to step outside and continues with the patient alone, documenting the circumstances. If hostility continues, Dr Joe terminates the session. A partial session record is still a valid and usable document.</p></div>
+        <div class="terminate-card"><p class="terminate-title">Scenario C — Patient appears distressed or changes prior position in family presence</p><p class="terminate-body">Dr Joe does not redirect or attempt to resolve the pressure in the moment. He documents the observed change carefully and invites family members to step outside at an appropriate pause. The divergence between the patient's responses alone (Session 2) versus in family presence (Session 3) is itself significant clinical evidence.</p></div>
+        <div class="terminate-card"><p class="terminate-title">Scenario D — Family member refuses or withdraws consent mid-session</p><p class="terminate-body">Dr Joe acknowledges the withdrawal without debate and excuses the family member. The session continues with remaining participants. The patient's reaction to the withdrawal is part of the record.</p></div>
+        <div class="terminate-card"><p class="terminate-title">Scenario E — Legal proceedings between parties disclosed during the session</p><p class="terminate-body">Dr Joe pauses immediately and does not continue until he has obtained independent advice on whether proceeding creates a professional conflict. He documents the disclosure and suspends the session pending review.</p></div>
       </div>
-
       <hr class="divider">
-
       <div class="section">
         <div class="section-label">Post-session documentation requirements</div>
-        <div class="card">
-          <p class="card-title">What Dr Joe documents after every Session 3</p>
-          <ul class="step-list">
-            <li>Names and relationships of all family members present</li>
-            <li>Any family member who declined to attend or withdrew consent</li>
-            <li>Seating arrangement and physical positioning in the room</li>
-            <li>Observable non-verbal dynamics — eye contact, body language, physical proximity</li>
-            <li>Any ground rule violations and Dr Joe's response</li>
-            <li>Any divergence between patient responses in Session 2 versus Session 3</li>
-            <li>Dr Joe's overall clinical observation of the patient's affect, composure, and consistency</li>
-            <li>Whether the session was completed, paused, or terminated — and the reason</li>
-          </ul>
-        </div>
+        <div class="card"><p class="card-title">What Dr Joe documents after every Session 3</p><ul class="step-list"><li>Names and relationships of all family members present</li><li>Any family member who declined to attend or withdrew consent</li><li>Seating arrangement and physical positioning in the room</li><li>Observable non-verbal dynamics — eye contact, body language, physical proximity</li><li>Any ground rule violations and Dr Joe's response</li><li>Any divergence between patient responses in Session 2 versus Session 3</li><li>Dr Joe's overall clinical observation of the patient's affect, composure, and consistency</li><li>Whether the session was completed, paused, or terminated — and the reason</li></ul></div>
       </div>
-
       <hr class="divider">
-
       <div class="section">
         <div class="section-label">Patient-facing briefing</div>
-        <div class="card">
-          <p class="card-title">What Dr Joe tells the patient before Session 3 is scheduled</p>
-          <div class="script-block">
-            <div class="script-label">Patient briefing script</div>
-            <p class="script-text">"Session 3 is an optional part of the Generational Legacy Assessment. Its purpose is to create a documented record of your family context — observed directly by me — at this point in time. You decide who attends. Before the session, I will briefly meet with the family members you have invited to explain the format and obtain their consent. During the session, I will direct questions primarily to you. Family members will be invited to respond at specific points. I will be taking notes throughout and the session will be recorded. Everything observed becomes part of your assessment record. You may stop the session at any time. This session is not therapy. It is not mediation. It is a professionally witnessed record of your family context, produced at a time when your intentions and your clarity of mind are documented and verified."</p>
-          </div>
-        </div>
+        <div class="card"><p class="card-title">What Dr Joe tells the patient before Session 3 is scheduled</p><div class="script-block"><div class="script-label">Patient briefing script</div><p class="script-text">"Session 3 is an optional part of the Generational Legacy Assessment. Its purpose is to create a documented record of your family context — observed directly by me — at this point in time. You decide who attends. Before the session, I will briefly meet with the family members you have invited to explain the format and obtain their consent. During the session, I will direct questions primarily to you. Family members will be invited to respond at specific points. I will be taking notes throughout and the session will be recorded. Everything observed becomes part of your assessment record. You may stop the session at any time. This session is not therapy. It is not mediation. It is a professionally witnessed record of your family context, produced at a time when your intentions and your clarity of mind are documented and verified."</p></div></div>
       </div>
     </div>
 
@@ -294,10 +202,13 @@
 </div>
 
 <script>
-function show(tab){
+function show(tab,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(n=>n.classList.remove('active'));
   document.getElementById('page-'+tab).classList.add('active');
-  event.target.classList.add('active');
+  el.classList.add('active');
 }
 </script>
+
+</body>
+</html>

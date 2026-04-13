@@ -1,0 +1,136 @@
+
+<style>
+  .brief { padding: 2rem 0; font-family: var(--font-sans); max-width: 720px; }
+  .brief-header { border-bottom: 0.5px solid var(--color-border-tertiary); padding-bottom: 1.5rem; margin-bottom: 1.5rem; }
+  .brief-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; color: var(--color-text-tertiary); text-transform: uppercase; margin-bottom: 6px; }
+  .brief-title { font-size: 22px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 6px; }
+  .brief-sub { font-size: 14px; color: var(--color-text-secondary); margin: 0; }
+  .section { margin-bottom: 1.75rem; }
+  .section-title { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 10px; }
+  .card-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+  .card-left { flex: 1; }
+  .card-tag { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 999px; margin-bottom: 6px; }
+  .tag-clinical { background: #FCEBEB; color: #791F1F; }
+  .tag-doc { background: #E1F5EE; color: #085041; }
+  .card-name { font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 4px; }
+  .card-desc { font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.6; }
+  .card-price { text-align: right; white-space: nowrap; }
+  .price-amount { font-size: 16px; font-weight: 500; color: var(--color-text-primary); }
+  .price-note { font-size: 11px; color: var(--color-text-tertiary); }
+  .total-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 0.5px solid var(--color-border-secondary); margin-top: 4px; }
+  .total-label { font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
+  .total-amount { font-size: 18px; font-weight: 500; color: var(--color-text-primary); }
+  .insight-card { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 10px; }
+  .insight-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 4px; }
+  .insight-body { font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.6; }
+  .divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 1.5rem 0; }
+  .quote { border-left: 2px solid var(--color-border-secondary); padding: 8px 14px; margin: 10px 0; border-radius: 0; }
+  .quote p { font-size: 13px; color: var(--color-text-secondary); margin: 0; font-style: italic; line-height: 1.6; }
+</style>
+<div class="brief">
+  <div class="brief-header">
+    <div class="brief-label">Internal product brief — Promises Healthcare</div>
+    <h1 class="brief-title">Generational Legacy Assessment</h1>
+    <p class="brief-sub">A structured documentation programme for UHNW patients — conducted by Dr Joseph Leong, Senior Consultant Psychiatrist</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">What this is</div>
+    <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0; line-height: 1.7;">The Generational Legacy Assessment is a three-part structured documentation programme for UHNW individuals who wish to ensure their legacy intentions are recorded with the rigour necessary to withstand scrutiny. It is not a clinical or psychiatric assessment programme. Its purpose is to create a contemporaneous, professionally witnessed record of the patient's clarity of mind, intentions, and family context — produced at a specific point in time, signed by a Senior Consultant Psychiatrist, and suitable for reference in trust, estate, and capacity proceedings.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Session structure and fees</div>
+
+    <div class="card">
+      <div class="card-row">
+        <div class="card-left">
+          <span class="card-tag tag-clinical">Clinical assessment</span>
+          <p class="card-name">Session 1 — Capacity assessment</p>
+          <p class="card-desc">Dr Joe's existing 1:1 consultation. Establishes baseline capacity. This is the clinical foundation, not the product. Patients already receiving this service may proceed to Sessions 2 and 3.</p>
+        </div>
+        <div class="card-price">
+          <div class="price-amount">SGD 1,500</div>
+          <div class="price-note">existing fee</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-row">
+        <div class="card-left">
+          <span class="card-tag tag-doc">Documentation session</span>
+          <p class="card-name">Session 2 — Legacy intentions interview</p>
+          <p class="card-desc">A structured 2-hour session with the patient alone. Not a clinical assessment. Purpose is to document, in the patient's own voice, their legacy intentions — what they wish to pass on, to whom, and under what conditions. Session is recorded and transcribed. A signed contemporaneous record is produced.</p>
+        </div>
+        <div class="card-price">
+          <div class="price-amount">SGD 3,500</div>
+          <div class="price-note">per session</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-row">
+        <div class="card-left">
+          <span class="card-tag tag-doc">Documentation session</span>
+          <p class="card-name">Session 3 — Family mapping session</p>
+          <p class="card-desc">A structured 2-hour session with the patient and selected family members present. Not a clinical intervention or mediation. Purpose is to document the relational landscape — who is present, what is observed, how the patient responds. Creates a forensic record of the family context at the time of the patient's decisions.</p>
+        </div>
+        <div class="card-price">
+          <div class="price-amount">SGD 4,500</div>
+          <div class="price-note">per session</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-row">
+        <div class="card-left">
+          <span class="card-tag tag-doc">Separate deliverable</span>
+          <p class="card-name">Clinical report and documentation</p>
+          <p class="card-desc">Comprehensive written report synthesising all three sessions. Litigation-ready. Signed by Dr Joseph Leong, Senior Consultant Psychiatrist, Promises Healthcare. Estimated drafting time: 3–4 hours. Charged separately as a standalone professional deliverable.</p>
+        </div>
+        <div class="card-price">
+          <div class="price-amount">SGD 2,500</div>
+          <div class="price-note">per report</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="total-row">
+      <div class="total-label">Total package (Sessions 2–3 + Report)</div>
+      <div class="total-amount">SGD 10,500</div>
+    </div>
+    <p style="font-size: 12px; color: var(--color-text-tertiary); margin: 6px 0 0;">Session 1 billed separately at existing rate. Full package excludes Session 1.</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="section-title">How to position this to patients</div>
+
+    <div class="insight-card">
+      <p class="insight-title">When the patient says: "I cannot change my family's mindset"</p>
+      <div class="quote"><p>"You don't need to. What we are doing is not about changing anyone's mind. It is about making sure that your mind — your clarity, your intentions, your wishes at this moment — is so thoroughly documented that it speaks for itself long after this conversation. Your family's mindset becomes irrelevant when the record is this strong."</p></div>
+    </div>
+
+    <div class="insight-card">
+      <p class="insight-title">The core reframe</p>
+      <p class="insight-body">This is not a family therapy exercise. This is a legacy protection measure. The patient is not being asked to manage their family. They are being given the means to ensure that what they have built cannot be dismantled after they are gone. Frame it as an act of agency, not an admission of vulnerability.</p>
+    </div>
+
+    <div class="insight-card">
+      <p class="insight-title">Pricing justification</p>
+      <p class="insight-body">The fee is not for clinical time. It is for a signed, professionally produced document that may determine the outcome of proceedings involving assets of significant value. UHNW patients routinely spend multiples of this figure on estate planning and legal fees. The Generational Legacy Assessment belongs in the same category — not in the same conversation as a therapy session.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="section-title">Referral pathway</div>
+    <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0; line-height: 1.7;">The most effective referral channel is the patient's own lawyer — specifically private wealth and trust partners who are already advising on estate and succession matters. When a trusted partner says "I would strongly recommend Dr Joseph's assessment before we finalise this," the patient does not need to be independently convinced. The 17 June roundtable and the pre-meeting 1:1 conversations with partners are the primary mechanism for seeding this referral behaviour.</p>
+  </div>
+</div>
